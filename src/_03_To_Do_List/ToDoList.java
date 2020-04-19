@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,6 +27,7 @@ public class ToDoList implements MouseListener, ActionListener {
 	static JButton saveList;
 	static JButton loadList;
 	static JPanel jpanel;
+	
 	 ArrayList<String> tasks =  new ArrayList<>();
 	/*
 	 * Create a program with five buttons, add task, view tasks, remove task, save list, and load list. 
@@ -121,14 +125,36 @@ public class ToDoList implements MouseListener, ActionListener {
 		}
 		if(e.getSource() == saveList) {
 			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("tasks.txt")));
-				pw.write(""+tasks);
-				pw.close();
+				FileWriter fw = new FileWriter("src/_03_To_Do_List/tasks.txt");
+				fw.write(""+ tasks);
+				fw.close();
+			} catch (IOException e2) {
 				
-			} catch (IOException e1) {
+				e2.printStackTrace();
+			}
+		}
+		if(e.getSource() == loadList) {
+			BufferedReader br;
+			String location = JOptionPane.showInputDialog("What is the location?");
+			try {
+				 br = new BufferedReader(new FileReader(""+location));
+				 try {
+					System.out.println(br.readLine());
+					br.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				 
+			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		
+	
+		
+	
+	}
 		}
 	}
-}
+	

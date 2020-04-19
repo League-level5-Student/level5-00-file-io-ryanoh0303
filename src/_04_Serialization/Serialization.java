@@ -1,10 +1,9 @@
 package _04_Serialization;
 
-import org.junit.Test;
 
 import java.io.*;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /*
  * Serialization is the process of converting an object into a stream of bytes
