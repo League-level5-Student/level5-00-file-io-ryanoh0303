@@ -16,14 +16,13 @@ import static org.junit.Assert.*;
  *
  * Challenge: Complete the SaveData class so that the test passes.
  */
-public class Serialization {
+public class Serialization{
 	private static final String DATA_FILE = "src/_04_Serialization/saved.dat";
 
 	@Test
 	public void test() {
 		String name = "Jeff";
 		int age = 32;
-
 		// Construct a SaveData object and save it to a file
 		save(new SaveData(name, age));
 
@@ -40,6 +39,8 @@ public class Serialization {
 	 */
 	private static void save(SaveData data) {
 		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			System.out.println("DATA: "+data.name);
+			System.out.println("DATA: "+data.age);
 			oos.writeObject(data);
 		} catch (IOException e) {
 			e.printStackTrace();
